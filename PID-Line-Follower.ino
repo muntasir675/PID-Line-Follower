@@ -143,7 +143,8 @@ void loop() {
       error = (float)sumWeights / activeCount;
       lastError = error;
   }
-// --- PID calculation using scaled gains ---
+
+  // --- PID calculation using scaled gains ---
   integral += error;
   integral = constrain(integral, -10, 10);
   float derivative = error - prevError;

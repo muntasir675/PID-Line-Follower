@@ -1,4 +1,9 @@
-build/
+# Arduino
 *.o
 *.elf
 *.hex
+
+# Zephyr / nRF Connect SDK
+build/
+firmware/build/
+firmware/peripheral_uart/build/
