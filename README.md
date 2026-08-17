@@ -1,4 +1,4 @@
-# PID-Line-Follower
+# PID Line Follower
 
 BLE-based wireless PID line-following robot using Arduino + nRF5340.
 
