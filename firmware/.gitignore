@@ -4,3 +4,15 @@
 
 # build
 /build*/
+
+# unused Nordic sample files (other boards / unused variants)
+/boards/
+/sysbuild/
+/prj_cdc.conf
+/prj_minimal.conf
+/sysbuild_bt_rpc.conf
+/usb.overlay
+/sample.yaml
+/README.rst
+/Kconfig.sysbuild
+/VERSION

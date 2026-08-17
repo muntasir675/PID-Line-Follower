@@ -14,8 +14,6 @@ float readBattery() {
 
 String buffer = "";
 char currentVar = '\0';
-// These initial values will override the PID values when turned
-//only works on full battery
 int Kp = 75;
 float Ki = 0.1;
 int Kd = 10;
