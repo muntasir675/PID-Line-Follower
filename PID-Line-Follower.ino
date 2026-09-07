@@ -1,4 +1,4 @@
-// --- Battery voltage reading ---
+// Battery voltage reading
 const int batteryPin = A0;
 
 float readBattery() {
@@ -8,9 +8,7 @@ float readBattery() {
   return batteryVoltage;
 }
 
-// ===========================================================
-// ===                   BLUETOOTH                         ===
-// ===========================================================
+// BLUETOOTH
 
 String buffer = "";
 char currentVar = '\0';
@@ -49,11 +47,8 @@ void readBluetooth() {
   }
 }
 
-// ===========================================================
-// ======================== PID CODE =========================
-// ===========================================================
-
-// --- Pins ---
+// PID CODE
+// Pins
 const int ENA = 3, ENB = 8;
 const int LL = 53, L = 51, M = 49, R = 47, RR = 45;
 const int pwmL = 5, dirL = 4;
@@ -89,23 +84,23 @@ void setup() {
   Serial.println("Send p/d/i/v followed by value, ending with space or newline");
 }
 void loop() {
-  // --- Read Bluetooth ---
+  // Read Bluetooth
   readBluetooth();
 
-  // --- Read battery ---
+  // Read battery
   float Vbat = readBattery();
   float voltageFactor = 12.6 / Vbat;
 
-  // --- Scale baseSpeed to compensate for lower voltage ---
+  // Scale baseSpeed to compensate for lower voltage
   baseSpeed = max_speed * voltageFactor;
   baseSpeed = constrain(baseSpeed, 0, 255);
 
-  // --- Scale PID gains according to battery voltage ---
+  // Scale PID gains according to battery voltage
   float effectiveKp = Kp * voltageFactor;
   float effectiveKi = Ki * voltageFactor;
   float effectiveKd = Kd * voltageFactor;
 
-  // --- Read sensors ---
+  // Read sensors
   bool sLL = !digitalRead(LL);
   bool sL  = !digitalRead(L);
   bool sM  = !digitalRead(M);
@@ -142,7 +137,7 @@ void loop() {
       lastError = error;
   }
 
-  // --- PID calculation using scaled gains ---
+  // PID calculation using scaled gains
   integral += error;
   integral = constrain(integral, -10, 10);
   float derivative = error - prevError;
@@ -151,7 +146,7 @@ void loop() {
   
 
   
-  // --- Apply correction to motors ---
+  // Apply correction to motors
   int leftSpeed = baseSpeed - correction;
   int rightSpeed = baseSpeed + correction;
 
@@ -163,7 +158,7 @@ void loop() {
   digitalWrite(dirL, LOW);
   digitalWrite(dirR, LOW);
 
-  // --- Optional: Print battery and baseSpeed ---
+  // Optional: Print battery and baseSpeed
   static unsigned long lastPrint = 0;
   if (millis() - lastPrint > 1000) {
     lastPrint = millis();
